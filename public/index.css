@@ -1,0 +1,7 @@
+.active {
+  color: green;
+}
+
+.vertical-aligned {
+  vertical-align: middle !important;
+}
