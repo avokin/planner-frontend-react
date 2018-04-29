@@ -33,7 +33,7 @@ export default class Day extends React.Component {
                 </td>
 
                 <td className="vertical-aligned">
-                    {task.isComplete}
+                    {task.isCompleted}
                 </td>
 
                 <td>
@@ -98,7 +98,7 @@ export default class Day extends React.Component {
     addTask() {
         const title = this.newTaskTitle.value;
 
-        let task = {title: title, dueDay: this.dayString, isComplete: false};
+        let task = {title: title, dueDay: this.dayString, isCompleted: false};
         INSTANCE.addTask(task);
         this.setState({tasks: INSTANCE.getTasksFor(this.dayString)});
     }
@@ -109,13 +109,13 @@ export default class Day extends React.Component {
     }
 
     completeTask(task) {
-        task.isComplete = true;
+        task.isCompleted = true;
         INSTANCE.updateTasks();
         this.setState({tasks: INSTANCE.getTasksFor(this.dayString)});
     }
 
     completeBlock(task) {
-        if (task.isComplete) {
+        if (task.isCompleted) {
             return <i className="fa fa-check"/>
         }
         return (
