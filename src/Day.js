@@ -63,7 +63,7 @@ export default class Day extends React.Component {
                                         <td colSpan="4">
                                             <div className="input-group">
                                                 <input className="form-control" placeholder="New task..."
-                                                       ref={input => this.newTaskTitle = input}/>
+                                                       ref={input => {this.newTaskTitle = input}}/>
                                                 <span className="input-group-btn">
                                                   <button onClick={this.addTask} className="btn btn-secondary">
                                                     Add
