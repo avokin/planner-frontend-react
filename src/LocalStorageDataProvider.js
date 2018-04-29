@@ -37,6 +37,11 @@ class LocalStorageDataProvider {
         LocalStorageDataProvider.serializeTasks(tasks);
     }
 
+    updateTasks() {
+        const tasks = this.getAllTasks();
+        LocalStorageDataProvider.serializeTasks(tasks);
+    }
+
     getTasksFor(day) {
         let tasks = this.getAllTasks();
         let result = [];

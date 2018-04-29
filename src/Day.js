@@ -13,6 +13,7 @@ export default class Day extends React.Component {
 
         this.addTask = this.addTask.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
+        this.handleChange = this.handleChange.bind(this);
 
         this.dayString = this.getDayString();
         let tasks = INSTANCE.getTasksFor(this.dayString);
@@ -32,8 +33,10 @@ export default class Day extends React.Component {
 
                 <td>
                     <DatePicker
-                        selected={this.state.today}
-                        onChange={this.handleChange}
+                        selected={moment(task.dueDay)}
+                        onChange={(date) =>
+                            this.handleChange(task, date)}
+                        dateFormat="YYYY-MM-DD"
                         className="form-control"
                     />
                 </td>
@@ -79,8 +82,12 @@ export default class Day extends React.Component {
         </div>
     }
 
-    handleChange() {
-        console.log("Changed")
+    handleChange(task, date) {
+        task.dueDay = date.format("YYYYMMDD");
+        INSTANCE.updateTasks();
+        this.setState({
+            tasks: this.state.tasks
+        });
     }
 
     addTask() {
