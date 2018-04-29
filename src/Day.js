@@ -1,6 +1,11 @@
 import React from 'react'
 import Calendar from "./Calendar";
 import {INSTANCE} from "./LocalStorageDataProvider";
+import DatePicker from "react-datepicker";
+import moment from "moment";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 
 export default class Day extends React.Component {
     constructor(props) {
@@ -12,7 +17,7 @@ export default class Day extends React.Component {
         this.dayString = this.getDayString();
         let tasks = INSTANCE.getTasksFor(this.dayString);
 
-        this.state = {tasks: tasks}
+        this.state = {tasks: tasks, today: moment()}
     }
 
     render() {
@@ -24,18 +29,15 @@ export default class Day extends React.Component {
                 <td className="vertical-aligned">
                     {task.title}
                 </td>
-                <td className="vertical-aligned">
-                    <div className="input-group vertical-aligned">
-                        <input type="text" className="form-control"
-                               placeholder="Due date"/>
-                        <div className="input-group-append">
-                            <button className="btn btn-outline-secondary"
-                                    type="button">
-                                <i className="fa fa-calendar"/>
-                            </button>
-                        </div>
-                    </div>
+
+                <td>
+                    <DatePicker
+                        selected={this.state.today}
+                        onChange={this.handleChange}
+
+                    />
                 </td>
+
                 <td onClick={() => this.deleteTask(task)} className="text-right vertical-aligned">
                     <button className="btn btn-secondary">Delete</button>
                 </td>
@@ -77,6 +79,10 @@ export default class Day extends React.Component {
         </div>
     }
 
+    handleChange() {
+        console.log("Changed")
+    }
+
     addTask() {
         const title = this.newTaskTitle.value;
 
@@ -106,8 +112,8 @@ export default class Day extends React.Component {
     }
 
     getDayString() {
-        if (this.props.params.day != null) {
-            return this.props.params.day;
+        if (this.props.day != null) {
+            return this.props.day;
         } else {
             const today = new Date();
             return today.getFullYear() + Day.formatTwoDigits(today.getMonth() + 1) + Day.formatTwoDigits(today.getDate());
