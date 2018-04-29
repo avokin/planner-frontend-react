@@ -34,7 +34,7 @@ export default class Day extends React.Component {
                     <DatePicker
                         selected={this.state.today}
                         onChange={this.handleChange}
-
+                        className="form-control"
                     />
                 </td>
 
