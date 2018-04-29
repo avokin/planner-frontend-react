@@ -13,7 +13,8 @@ export default class Day extends React.Component {
 
         this.addTask = this.addTask.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.updateDueDate = this.updateDueDate.bind(this);
+        this.completeTask = this.completeTask.bind(this);
 
         this.dayString = this.getDayString();
         let tasks = INSTANCE.getTasksFor(this.dayString);
@@ -31,11 +32,15 @@ export default class Day extends React.Component {
                     {task.title}
                 </td>
 
+                <td className="vertical-aligned">
+                    {task.isComplete}
+                </td>
+
                 <td>
                     <DatePicker
                         selected={moment(task.dueDay)}
                         onChange={(date) =>
-                            this.handleChange(task, date)}
+                            this.updateDueDate(task, date)}
                         dateFormat="YYYY-MM-DD"
                         className="form-control"
                     />
@@ -82,7 +87,7 @@ export default class Day extends React.Component {
         </div>
     }
 
-    handleChange(task, date) {
+    updateDueDate(task, date) {
         task.dueDay = date.format("YYYYMMDD");
         INSTANCE.updateTasks();
         this.setState({
@@ -104,7 +109,9 @@ export default class Day extends React.Component {
     }
 
     completeTask(task) {
-
+        task.isComplete = true;
+        INSTANCE.updateTasks();
+        this.setState({tasks: INSTANCE.getTasksFor(this.dayString)});
     }
 
     completeBlock(task) {
@@ -112,7 +119,7 @@ export default class Day extends React.Component {
             return <i className="fa fa-check"/>
         }
         return (
-            <button className="btn btn-secondary" onClick={this.completeTask(task)}>
+            <button className="btn btn-secondary" onClick={() => {this.completeTask(task)}}>
                 Complete
             </button>
         )
