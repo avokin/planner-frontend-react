@@ -12,6 +12,7 @@ export default class Day extends React.Component {
         super(props);
 
         this.addTask = this.addTask.bind(this);
+        this.newTaskNameTypedHandler = this.newTaskNameTypedHandler.bind(this);
         this.deleteTask = this.deleteTask.bind(this);
         this.updateDueDate = this.updateDueDate.bind(this);
         this.completeTask = this.completeTask.bind(this);
@@ -68,7 +69,8 @@ export default class Day extends React.Component {
                                         <td colSpan="4">
                                             <div className="input-group">
                                                 <input className="form-control" placeholder="New task..."
-                                                       ref={input => {this.newTaskTitle = input}}/>
+                                                       ref={input => {this.newTaskTitle = input}}
+                                                       onKeyPress={this.newTaskNameTypedHandler.bind(this)}/>
                                                 <span className="input-group-btn">
                                                   <button onClick={this.addTask} className="btn btn-secondary">
                                                     Add
@@ -93,6 +95,13 @@ export default class Day extends React.Component {
         this.setState({
             tasks: this.state.tasks
         });
+    }
+
+    newTaskNameTypedHandler(event) {
+        var code = event.keyCode || event.which;
+        if (code === 13) {
+            this.addTask();
+        }
     }
 
     addTask() {
