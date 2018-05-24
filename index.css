@@ -5,3 +5,7 @@
 .vertical-aligned {
   vertical-align: middle !important;
 }
+
+[role="main"] {
+  padding-top: 60px;
+}
