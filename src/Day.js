@@ -126,8 +126,8 @@ export default class Day extends React.Component {
     }
 
     getDayString() {
-        if (this.props.day != null) {
-            return this.props.day;
+        if (this.props.params.day != null) {
+            return this.props.params.day;
         } else {
             const today = new Date();
             return today.getFullYear() + Day.formatTwoDigits(today.getMonth() + 1) + Day.formatTwoDigits(today.getDate());
