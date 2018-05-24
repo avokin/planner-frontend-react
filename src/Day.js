@@ -110,6 +110,8 @@ export default class Day extends React.Component {
         let task = {title: title, dueDay: this.dayString, isCompleted: false};
         INSTANCE.addTask(task);
         this.setState({tasks: INSTANCE.getTasksFor(this.dayString)});
+
+        this.newTaskTitle.value = "";
     }
 
     deleteTask(task) {
