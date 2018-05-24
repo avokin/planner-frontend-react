@@ -93,7 +93,7 @@ export default class Day extends React.Component {
         task.dueDay = date.format("YYYYMMDD");
         INSTANCE.updateTasks();
         this.setState({
-            tasks: this.state.tasks
+            tasks: INSTANCE.getTasksFor(this.dayString)
         });
     }
 
