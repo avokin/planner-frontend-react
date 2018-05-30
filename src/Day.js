@@ -1,6 +1,7 @@
 import React from 'react'
 import Calendar from "./Calendar";
 import {INSTANCE} from "./LocalStorageDataProvider";
+import {getDayString} from "./day/DayUtil";
 import DatePicker from "react-datepicker";
 import moment from "moment";
 
@@ -17,7 +18,7 @@ export default class Day extends React.Component {
         this.updateDueDate = this.updateDueDate.bind(this);
         this.completeTask = this.completeTask.bind(this);
 
-        this.dayString = this.getDayString();
+        this.dayString = getDayString(this.props.params.day);
         let tasks = INSTANCE.getTasksFor(this.dayString);
 
         this.state = {tasks: tasks, today: moment()}
@@ -134,18 +135,5 @@ export default class Day extends React.Component {
                 Complete
             </button>
         )
-    }
-
-    getDayString() {
-        if (this.props.params.day != null) {
-            return this.props.params.day;
-        } else {
-            const today = new Date();
-            return today.getFullYear() + Day.formatTwoDigits(today.getMonth() + 1) + Day.formatTwoDigits(today.getDate());
-        }
-    }
-
-    static formatTwoDigits(number) {
-        return ("0" + number).slice(-2)
     }
 }
