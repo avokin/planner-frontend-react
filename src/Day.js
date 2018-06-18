@@ -99,7 +99,7 @@ export default class Day extends React.Component {
     }
 
     newTaskNameTypedHandler(event) {
-        var code = event.keyCode || event.which;
+        const code = event.keyCode || event.which;
         if (code === 13) {
             this.addTask();
         }
