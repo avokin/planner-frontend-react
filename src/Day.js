@@ -67,16 +67,16 @@ export default class Day extends React.Component {
                                     <tbody>
                                     {listItems}
                                     <tr>
-                                        <td colSpan="4">
-                                            <div className="input-group">
+                                        <td colSpan="5">
+                                            <div className="input-group mb-3">
                                                 <input className="form-control" placeholder="New task..."
                                                        ref={input => {this.newTaskTitle = input}}
                                                        onKeyPress={this.newTaskNameTypedHandler.bind(this)}/>
-                                                <span className="input-group-btn">
-                                                  <button onClick={this.addTask} className="btn btn-secondary">
+                                                <div className="input-group-append">
+                                                  <button onClick={this.addTask} className="btn btn-outline-secondary">
                                                     Add
                                                   </button>
-                                                </span>
+                                                </div>
                                             </div>
                                         </td>
                                     </tr>
