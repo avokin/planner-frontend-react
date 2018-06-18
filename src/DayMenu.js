@@ -20,6 +20,10 @@ export default class DayMenu extends React.Component {
             </li>
 
             <li className="nav-item">
+                <a href={'/day'} className="nav-link">Today</a>
+            </li>
+
+            <li className="nav-item">
                 <a href={'/day/' + getNextDay(this.currentDay)} className="nav-link">Next Day</a>
             </li>
         </ul>
